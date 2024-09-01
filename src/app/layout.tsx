@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
 import { DATA } from "@/data/resume";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(DATA.url),
   title: {
     default: DATA.name,
-    template: `%s | ${DATA.name}`
+    template: `%s | ${DATA.name}`,
   },
   description: DATA.description,
   openGraph: {
@@ -30,14 +31,14 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    }
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
   twitter: {
     title: `${DATA.name}`,
-    card: 'summary_large_image',
+    card: "summary_large_image",
   },
   verification: {
     google: "",
@@ -58,7 +59,9 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="light">
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
