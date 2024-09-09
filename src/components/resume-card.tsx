@@ -87,7 +87,7 @@ export const ResumeCard = ({
             {subtitle && <div className="font-sans text-xs">{subtitle}</div>}
           </CardHeader>
           {description && (
-            <motion.div
+            <motion.ul
               initial={{ opacity: 0, height: 0 }}
               animate={{
                 opacity: isExpanded ? 1 : 0,
@@ -100,8 +100,13 @@ export const ResumeCard = ({
               }}
               className="mt-2 text-xs sm:text-sm"
             >
-              {description}
-            </motion.div>
+              {description
+                .split(/(?<!\d)\. /) // Split by period and space, but avoid breaking on decimal numbers
+                .filter((item) => item.trim() !== "") // Filter out any empty entries
+                .map((item, index) => (
+                  <li key={index}>● {item}.</li> // Re-add the period to the end
+                ))}
+            </motion.ul>
           )}
         </div>
       </Card>
