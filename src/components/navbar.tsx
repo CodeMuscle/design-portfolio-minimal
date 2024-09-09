@@ -88,7 +88,6 @@ export default function Navbar() {
             </TooltipProvider>
           </DockIcon>
         </Dock>
-      </div>
     </div>
   );
 }
